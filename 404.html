@@ -1,10 +1,660 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Страница не найдена</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALEX - #1 Roblox Exploit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary: #bfff00;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f0f0f0;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), #0a1e0e);
+            color: var(--light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(46, 204, 113, 0.1) 0%, transparent 40%), 
+                        radial-gradient(circle at 80% 70%, rgba(191, 255, 0, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Стили для навигации */
+        header {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(191, 255, 0, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: #a6e000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(191, 255, 0, 0.6);
+        }
+        
+        /* Стили для 404 страницы */
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .error-content {
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .error-title {
+            font-size: 15rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(46, 204, 113, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .error-subtitle {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .error-text {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #bbb;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        .astronaut {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            animation: floatAstronaut 8s ease-in-out infinite;
+            z-index: 0;
+            opacity: 0.2;
+        }
+        
+        .planet {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #3498db, #1a5276);
+            bottom: -100px;
+            right: -50px;
+            z-index: 0;
+            animation: rotate 60s linear infinite;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        /* Стили для страниц документации и информации */
+        .page-container {
+            padding: 180px 0 100px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .content-box {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease;
+        }
+        
+        .content-box h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-bottom: 2px solid rgba(46, 204, 113, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .content-box h3 {
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            color: var(--secondary);
+        }
+        
+        .content-box p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .content-box ul, .content-box ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .content-box li {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        
+        .content-box a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .content-box a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes floatAstronaut {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-55%, -45%) rotate(5deg); }
+            50% { transform: translate(-45%, -55%) rotate(-5deg); }
+            75% { transform: translate(-55%, -45%) rotate(5deg); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px white; }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .error-title {
+                font-size: 10rem;
+            }
+            
+            .error-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .astronaut {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .planet {
+                width: 200px;
+                height: 200px;
+                bottom: -50px;
+                right: -30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Ошибка 404</h1>
-    <p>Такой страницы не существует</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">VAL<span>EX</span></a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="documentation.html">Documentation</a>
+                    <a href="information.html">Information</a>
+                    <a href="#">Resources</a>
+                    <a href="#">Support</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-key"></i> Buy Key</a>
+                    <a href="#" class="btn btn-secondary"><i class="fab fa-discord"></i> Discord</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Контент страницы -->
+    <div id="page-content">
+        <!-- Содержимое будет меняться в зависимости от страницы -->
+    </div>
+
+    <script>
+        // Определяем текущую страницу
+        const currentPage = window.location.pathname.split('/').pop();
+        
+        // Функция для создания 404 страницы
+        function create404Page() {
+            const content = document.getElementById('page-content');
+            content.innerHTML = `
+                <div class="error-container">
+                    <div class="error-content">
+                        <div class="stars" id="stars"></div>
+                        <div class="astronaut">
+                            <i class="fas fa-user-astronaut" style="font-size: 200px; color: rgba(255,255,255,0.5);"></i>
+                        </div>
+                        <div class="planet"></div>
+                        <h1 class="error-title">404</h1>
+                        <h2 class="error-subtitle">Page Not Found</h2>
+                        <p class="error-text">The page you're looking for doesn't exist or has been moved. Please check the URL or navigate back to our homepage.</p>
+                        <a href="index.html" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
+                            <i class="fas fa-home"></i> Go Back Home
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            // Создаем звезды
+            createStars();
+        }
+        
+        // Функция для создания страницы документации
+        function createDocumentationPage() {
+            const content = document.getElementById('page-content');
+            content.innerHTML = `
+                <div class="page-container">
+                    <div class="container">
+                        <div class="page-header">
+                            <h1>Documentation</h1>
+                            <p>Learn how to use Valex Exploit with our comprehensive documentation</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>Getting Started</h2>
+                            <p>Welcome to Valex Exploit documentation. This guide will help you get started with our powerful Roblox exploit.</p>
+                            
+                            <h3>Installation</h3>
+                            <p>To install Valex Exploit, follow these steps:</p>
+                            <ol>
+                                <li>Download the Valex installer from our official website</li>
+                                <li>Run the installer and follow the on-screen instructions</li>
+                                <li>Restart your computer if prompted</li>
+                                <li>Launch Valex from your desktop shortcut</li>
+                            </ol>
+                            
+                            <h3>System Requirements</h3>
+                            <ul>
+                                <li>Windows 10 or newer (64-bit)</li>
+                                <li>4GB RAM minimum (8GB recommended)</li>
+                                <li>DirectX 11 compatible GPU</li>
+                                <li>Stable internet connection</li>
+                                <li>Microsoft .NET Framework 4.8</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>Using the Executor</h2>
+                            <p>Valex Executor allows you to run Lua scripts in Roblox games with ease.</p>
+                            
+                            <h3>Basic Usage</h3>
+                            <p>Follow these steps to execute scripts:</p>
+                            <ol>
+                                <li>Launch Roblox and join a game</li>
+                                <li>Open Valex Executor (press F9 by default)</li>
+                                <li>Paste your script into the editor window</li>
+                                <li>Click the "Execute" button</li>
+                                <li>Your script should now be running in the game</li>
+                            </ol>
+                            
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li><strong>Script Hub:</strong> Access hundreds of pre-made scripts</li>
+                                <li><strong>Auto Attach:</strong> Automatically injects when Roblox starts</li>
+                                <li><strong>Custom Themes:</strong> Personalize the UI to your liking</li>
+                                <li><strong>Script Scheduler:</strong> Run scripts at specific times</li>
+                                <li><strong>Multi-threading:</strong> Execute multiple scripts simultaneously</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>Troubleshooting</h2>
+                            <p>If you encounter issues with Valex, try these solutions:</p>
+                            
+                            <h3>Common Problems</h3>
+                            <ul>
+                                <li><strong>Executor not injecting:</strong> Make sure your antivirus isn't blocking Valex. Add Valex to your exceptions list.</li>
+                                <li><strong>Scripts not working:</strong> Check if the script is compatible with the game version. Try updating the script.</li>
+                                <li><strong>Performance issues:</strong> Close unnecessary background applications. Lower graphics settings in Roblox.</li>
+                            </ul>
+                            
+                            <h3>Getting Support</h3>
+                            <p>If you need additional help, please join our Discord server where our support team can assist you.</p>
+                            <a href="#" class="btn btn-secondary"><i class="fab fa-discord"></i> Join Discord Support</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Функция для создания страницы информации
+        function createInformationPage() {
+            const content = document.getElementById('page-content');
+            content.innerHTML = `
+                <div class="page-container">
+                    <div class="container">
+                        <div class="page-header">
+                            <h1>Information</h1>
+                            <p>Learn more about Valex Exploit, our features, and policies</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>About Valex</h2>
+                            <p>Valex is the #1 Roblox exploit on the market, trusted by over 800,000 users worldwide. Our mission is to provide the most powerful and undetectable scripting experience for Roblox players.</p>
+                            
+                            <h3>Our History</h3>
+                            <p>Founded in 2021, Valex started as a small project by a group of passionate developers. Over the years, we've grown into the most advanced exploit solution for Roblox, constantly innovating and staying ahead of detection systems.</p>
+                            
+                            <h3>The Team</h3>
+                            <p>Valex is developed and maintained by a dedicated team of 12 developers, security experts, and support staff. We work around the clock to ensure our users have the best possible experience.</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>Features Overview</h2>
+                            <p>Valex offers two main products with distinct features:</p>
+                            
+                            <h3>Valex External</h3>
+                            <ul>
+                                <li><strong>Undetectable Aimbot:</strong> Advanced targeting system with customizable settings</li>
+                                <li><strong>ESP System:</strong> See players through walls with customizable visuals</li>
+                                <li><strong>Kill All:</strong> Eliminate all players with a single click</li>
+                                <li><strong>Fling All:</strong> Send players flying across the map</li>
+                                <li><strong>Silent Aim:</strong> Hit targets without visibly aiming</li>
+                            </ul>
+                            
+                            <h3>Valex Executor</h3>
+                            <ul>
+                                <li><strong>100% SUNC Score:</strong> Maximum security against detection</li>
+                                <li><strong>Multi-script Support:</strong> Run multiple scripts simultaneously</li>
+                                <li><strong>Script Hub Integration:</strong> Access thousands of community scripts</li>
+                                <li><strong>Custom Injector:</strong> Tailor the injection process to your needs</li>
+                                <li><strong>Auto-update System:</strong> Always stay current with the latest version</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h2>Legal Information</h2>
+                            <p>Please review our legal policies and terms of service.</p>
+                            
+                            <h3>Terms of Service</h3>
+                            <p>By using Valex Exploit, you agree to our Terms of Service. Key points include:</p>
+                            <ul>
+                                <li>Valex is for educational purposes only</li>
+                                <li>You are responsible for how you use our software</li>
+                                <li>We are not liable for any account bans or suspensions</li>
+                                <li>Redistribution of our software is strictly prohibited</li>
+                            </ul>
+                            
+                            <h3>Privacy Policy</h3>
+                            <p>We take your privacy seriously. Our policy includes:</p>
+                            <ul>
+                                <li>We collect minimal data necessary for product operation</li>
+                                <li>No personal information is shared with third parties</li>
+                                <li>We implement industry-standard security measures</li>
+                                <li>You can request deletion of your data at any time</li>
+                            </ul>
+                            
+                            <a href="#" class="btn btn-primary"><i class="fas fa-file-contract"></i> View Full Terms</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Функция для создания звездного неба
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Случайный размер
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Случайное положение
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Случайная задержка анимации
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Определяем какую страницу показывать
+        document.addEventListener('DOMContentLoaded', () => {
+            if (currentPage === '404.html' || currentPage === '') {
+                create404Page();
+            } else if (currentPage === 'documentation.html') {
+                createDocumentationPage();
+            } else if (currentPage === 'information.html') {
+                createInformationPage();
+            } else {
+                // Для демонстрации покажем 404 страницу
+                create404Page();
+            }
+        });
+    </script>
 </body>
 </html>
