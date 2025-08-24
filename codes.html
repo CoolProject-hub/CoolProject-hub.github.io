@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Toster Web - Коды</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function copyCode(id) {
+            let code = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(code);
+            alert("Код скопирован!");
+        }
+        function openSecret() {
+            window.location.href = "secret.html";
+        }
+    </script>
+</head>
+<body>
+    <header>Toster Web</header>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="codes.html">Коды</a>
+        <a href="mix.html">Микс</a>
+    </nav>
+    <main>
+        <h2>Таблицы кодов</h2>
+        <table>
+            <tr><th>Описание</th><th>Код</th><th></th></tr>
+            <tr>
+                <td>Пример скрипта 1</td>
+                <td id="code1">print("Hello Roblox!")</td>
+                <td><button class="copy-btn" onclick="copyCode('code1')">Копировать</button></td>
+            </tr>
+            <tr>
+                <td>Пример скрипта 2</td>
+                <td id="code2">game.Players.LocalPlayer:Kick("Bye!")</td>
+                <td><button class="copy-btn" onclick="copyCode('code2')">Копировать</button></td>
+            </tr>
+        </table>
+
+        <button class="secret-btn" onclick="openSecret()">???</button>
+    </main>
+</body>
+</html>
